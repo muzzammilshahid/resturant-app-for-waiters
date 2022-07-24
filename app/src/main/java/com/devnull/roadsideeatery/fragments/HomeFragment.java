@@ -1,6 +1,8 @@
 package com.devnull.roadsideeatery.fragments;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import com.devnull.roadsideeatery.db.ItemData;
 import com.devnull.roadsideeatery.db.RoomDB;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -68,6 +71,31 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(requireActivity(), "Please select products to order", Toast.LENGTH_SHORT).show();
             }
 
+        });
+
+        binding.searchInChats.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                itemDataArrayList.clear();
+                List<ItemData> secondList = RoomDB.getInstance(requireContext()).mainDao().getAll();
+                for (int j = 0; j < secondList.size(); j++) {
+                    ItemData itemData = secondList.get(j);
+                    if (itemData.getItemName().contains(charSequence)) {
+                        itemDataArrayList.add(itemData);
+                    }
+                }
+                itemGridAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
         });
     }
 }

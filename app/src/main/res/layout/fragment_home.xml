@@ -6,6 +6,17 @@
     android:orientation="vertical"
     tools:context=".fragments.HomeFragment">
 
+    <EditText
+        android:id="@+id/search_in_chats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:alpha="0.4"
+        android:hint="Search Item"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/black" />
+
     <GridView
         android:id="@+id/simpleGridView"
         android:layout_width="match_parent"
@@ -13,7 +24,7 @@
         android:layout_margin="8dp"
         android:layout_weight="1"
         android:horizontalSpacing="10dp"
-        android:numColumns="2"
+        android:numColumns="1"
         android:verticalSpacing="10dp" />
 
     <Button
